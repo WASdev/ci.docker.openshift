@@ -1,0 +1,18 @@
+FROM websphere-liberty
+# Install Maven
+RUN apt-get update \
+	  && apt-get -y install maven \
+	  && mkdir -p /opt/s2i/destination \
+	  && apt -y install openjdk-8-jdk
+
+LABEL io.k8s.description="Platform for building and running JEE applications on WebSphere-Liberty 8.5.5.8" \
+      io.k8s.display-name="WebSphere-Liberty 8.5.5.9" \
+      io.openshift.expose-services="9080:http" \
+      io.openshift.tags="builder,liberty,websphere-liberty" \
+      io.openshift.s2i.destination="/opt/s2i/destination" \
+	  io.openshift.s2i.scripts-url="image:///opt/s2i/"
+
+# Copy Scripts to build s2i 
+COPY assemble /opt/s2i/ 
+COPY run /opt/s2i/ 
+COPY usage /opt/s2i/
