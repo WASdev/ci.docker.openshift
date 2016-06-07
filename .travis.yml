@@ -15,4 +15,4 @@ before_install:
  - export PATH=$PATH:/usr/lib/go-1.6
  - sudo mkdir /home/travis/build/tmp 
  - export GOPATH=/home/travis/build/tmp
- - chmod 777 /home/travis/build/tmp
+ - sudo chmod 777 /home/travis/build/tmp
