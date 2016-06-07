@@ -16,15 +16,15 @@
 
 # inform the user how to use the image
 cat <<EOF
-This is an S2I WebSphere-Liberty 8.5.5.8 base image that is responsible for consuming a JEE project and deploying it onto a WebSphere-Liberty Application server.
+This is an S2I WebSphere Liberty base image that is responsible for consuming a JEE project and deploying it onto a WebSphere Liberty Application server.
 To Use it, install S2I at: https://github.com/openshift/source-to-image.
 
 Sample invocation:
 
-s2i build https://github.com/jamiecoleman92/sample.ferret.git jamielcoleman/liberty:v5 libertys2itest
+s2i build https://github.com/WASdev/sample.ferret.git websphere-liberty libertys2itest
 
 You can then run the resulting image via
-docker run -p libertys2itest
+docker run -p <image name>
 
 Details:
 If a pom.xml file is present in the source directory then the project is built with maven and the output in target will be copied into the Liberty deployments directory /opt/ibm/wlp/usr/servers/defaultServer/dropins/.

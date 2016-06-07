@@ -23,7 +23,6 @@
 #                                                                                   #
 #####################################################################################
 
-#Install the GO Language
 echo "performing go get"
 go get github.com/openshift/source-to-image
 cd ${GOPATH}/src/github.com/openshift/source-to-image
@@ -31,7 +30,7 @@ export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/loc
 sudo hack/build-go.sh
 
 #Use source-to-image to pull down our source code, deploy it to liberty
-cd /home/travis/build/jamiecoleman92/ci.docker.openshift/source2image
+cd /home/travis/build/tmp/ci.docker.openshift/source2image
 echo "build liberty"
 docker build -t liberty .
 s2i build https://github.com/WASdev/sample.ferret.git liberty libertys2i
@@ -53,4 +52,7 @@ found=1
     if [ $found == 0 ]
     then
       echo "Test Passed"
+	exit
+    else
+	exit 2
     fi
