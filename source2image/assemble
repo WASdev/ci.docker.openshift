@@ -19,7 +19,7 @@ LOCAL_SOURCE_DIR=/root/
 mkdir -p $LOCAL_SOURCE_DIR
 
 # Resulting WAR files will be deployed to /opt/ibm/wlp/usr/servers/defaultServer/dropins/
-DEPLOY_DIR=/opt/ibm/wlp/usr/servers/defaultServer/dropins/
+DEPLOY_DIR=/config/dropins/
 
 # Copy the source for compilation
 cp -Rf /opt/s2i/destination/src/. $LOCAL_SOURCE_DIR
@@ -34,7 +34,6 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   restore_saved_artifacts
 
   pushd $LOCAL_SOURCE_DIR &> /dev/null
-  JAVA_HOME=/usr
 
   if [ -z "$MAVEN_ARGS" ]; then
     export MAVEN_ARGS="package -Popenshift -DskipTests"
@@ -53,24 +52,24 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
     exit $ERR
   fi
 
-  
-#Copy .war file from the source directory 
+
+  #Copy .war file from the source directory
   echo "Copying built war files into $DEPLOY_DIR for later deployment..."
   popd &> /dev/null
-  else
+else
   echo "Copying binaries in source directory into $DEPLOY_DIR for later deployment..."
-  fi
+fi
 
-  if [ -d $LOCAL_SOURCE_DIR/target ]; then
-  cp $LOCAL_SOURCE_DIR/target/*.war $DEPLOY_DIR >& /dev/null
-  chgrp -R 0 $DEPLOY_DIR
-  chmod -R g+rw $DEPLOY_DIR
-  fi
-  
-  if [ -d $LOCAL_SOURCE_DIR/deployments ]; then
+if [ -d $LOCAL_SOURCE_DIR/target ]; then
   cp $LOCAL_SOURCE_DIR/target/*.war $DEPLOY_DIR >& /dev/null
   chgrp -R 0 $DEPLOY_DIR
   chmod -R g+rw $DEPLOY_DIR
 fi
-echo "Application deployment finished! Please start up the WebSphere-Liberty container using the following command: docker run -P <name of image>"
+
+if [ -d $LOCAL_SOURCE_DIR/deployments ]; then
+  cp $LOCAL_SOURCE_DIR/deployments/*.war $DEPLOY_DIR >& /dev/null
+  chgrp -R 0 $DEPLOY_DIR
+  chmod -R g+rw $DEPLOY_DIR
+fi
+echo "Application deployment finished! Please start up the WebSphere Liberty container using the following command: docker run -P <name of image>"
 exit $rc
