@@ -9,13 +9,9 @@ script:
 - make test
 
 before_install:
- - pwd
- - echo $HOME
  - sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
  - sudo apt-get -y update
  - sudo apt-get -y install golang
  - export PATH=$PATH:/usr/lib/go-1.6
- - sudo mkdir /home/travis/build/tmp/
- - export GOPATH=/home/travis/build/tmp/
- - sudo chmod 777 /home/travis/build/tmp
+ - export GOPATH=pwd
 
