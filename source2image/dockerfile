@@ -4,7 +4,7 @@ ENV JAVA_VER=8 \
     JAVA_REL=0 \
     JAVA_MF=3.0
 
-RUN apt-get update
+RUN apt-get update \
   && apt-get -y install maven \
   && mkdir -p /opt/s2i/destination \
   && TARGET_ARCH=$(uname -m) \
