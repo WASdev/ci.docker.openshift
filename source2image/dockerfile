@@ -7,10 +7,10 @@ ENV JAVA_VER=8 \
 RUN apt-get update
 RUN apt-get -y install maven
 RUN mkdir -p /opt/s2i/destination
-RUN TARGET_ARCH=$(uname -m)
-RUN JAVA_VRMF=$JAVA_VER.$JAVA_REL-$JAVA_MF
-RUN YML_FILENAME=ibm-java-sdk-$JAVA_VRMF-linux-$TARGET_ARCH-javase.yml
-RUN BASE_URL="https://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/meta"
+ENV TARGET_ARCH=$(uname -m)
+ENV JAVA_VRMF=$JAVA_VER.$JAVA_REL-$JAVA_MF
+ENV YML_FILENAME=ibm-java-sdk-$JAVA_VRMF-linux-$TARGET_ARCH-javase.yml
+ENV BASE_URL="https://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/meta"
 RUN wget -nv -U UA-IBM_JAVA_Docker -O /tmp/ibm-java.yml $BASE_URL/$JAVA_VER$JAVA_REL/$YML_FILENAME
 RUN JAVA_URL=$(cat /tmp/ibm-java.yml | sed -n 's/\s*uri:\s//p' | tr -d '\r')
 RUN wget -nv -U UA-IBM-JAVA-Docker -O /tmp/ibm-java.bin $JAVA_URL
