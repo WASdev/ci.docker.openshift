@@ -1,4 +1,5 @@
 FROM websphere-liberty:javaee7
+
 # Install Maven
 ENV JAVA_VER=8 \
     JAVA_REL=0 \

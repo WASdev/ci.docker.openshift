@@ -32,6 +32,7 @@ sudo hack/build-go.sh
 #Use source-to-image to pull down our source code, deploy it to liberty
 cd ${GOPATH}/source2image
 echo "build liberty"
+pwd
 docker build -t liberty .
 s2i build https://github.com/WASdev/sample.ferret.git liberty libertys2i
 
