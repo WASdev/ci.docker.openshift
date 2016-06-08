@@ -5,7 +5,7 @@ ENV JAVA_VER=8 \
     JAVA_MF=3.0
 
 RUN apt-get update \
-  && rm -r /opt/ibm/ \
+  && rm -r /opt/ibm/java/ \
   && apt-get -y install maven \
   && mkdir -p /opt/s2i/destination \
   && TARGET_ARCH=$(uname -m) \
@@ -27,7 +27,7 @@ RUN apt-get update \
   && rm -f /tmp/response.properties \
   && rm -f /tmp/ibm-java.bin
 ENV JAVA_HOME=/opt/ibm/java \
-    PATH=/opt/ibm/java/sdk/bin:$PATH
+    PATH=/opt/ibm/java/jre/bin:$PATH
 
 LABEL io.k8s.description="Platform for building and running JEE applications on WebSphere Liberty" \
       io.k8s.display-name="WebSphere Liberty" \
