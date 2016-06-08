@@ -14,4 +14,5 @@ before_install:
  - sudo apt-get -y install golang
  - export PATH=$PATH:/usr/lib/go-1.6
  - export GOPATH=$HOME
+ - echo $HOME
 
