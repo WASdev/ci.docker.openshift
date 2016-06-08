@@ -29,6 +29,8 @@ cd ${GOPATH}/src/github.com/openshift/source-to-image
 export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/
 sudo hack/build-go.sh
 cd ${GOPATH}
+pwd
+ls
 #Use source-to-image to pull down our source code, deploy it to liberty
 cd ci.docker.openshift/source2image
 echo "build liberty"
