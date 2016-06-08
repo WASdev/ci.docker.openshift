@@ -4,9 +4,6 @@ RUN apt-get update \
 	  && apt-get -y install maven \
 	  && mkdir -p /opt/s2i/destination \
 	  && wget -q -U UA-IBM-JAVA-Docker -O /tmp/ibm-java.bin https://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.3.0/linux/x64/ibm-java-sdk-8.0-3.0-x86_64-archive.bin \
-	  && ESUM=$(cat /tmp/ibm-java.yml | sed -n 's/\s*md5sum:\s//p' | tr -d '\r') \
-	  && echo "$ESUM /tmp/ibm-java.bin" | md5sum -c - \
-	  && rm -f /tmp/ibm-java.yml \
 	  && echo "INSTALLER_UI=silent" > /tmp/response.properties \
 	  && echo "USER_INSTALL_DIR=/opt/ibm/java" >> /tmp/response.properties \
 	  && echo "LICENSE_ACCEPTED=TRUE" >> /tmp/response.properties \
@@ -25,7 +22,7 @@ LABEL io.k8s.description="Platform for building and running JEE applications on 
       io.openshift.s2i.destination="/opt/s2i/destination" \
 	  io.openshift.s2i.scripts-url="image:///opt/s2i/"
 
-# Copy Scripts to build s2i 
-COPY assemble /opt/s2i/ 
-COPY run /opt/s2i/ 
+# Copy Scripts to build s2i
+COPY assemble /opt/s2i/
+COPY run /opt/s2i/
 COPY usage /opt/s2i/
