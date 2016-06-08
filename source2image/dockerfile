@@ -11,9 +11,9 @@ RUN TARGET_ARCH=$(uname -m)
 RUN JAVA_VRMF=$JAVA_VER.$JAVA_REL-$JAVA_MF
 RUN YML_FILENAME=ibm-java-sdk-$JAVA_VRMF-linux-$TARGET_ARCH-javase.yml
 RUN BASE_URL="https://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/meta"
-RUN wget -q -U UA-IBM_JAVA_Docker -O /tmp/ibm-java.yml $BASE_URL/$JAVA_VER$JAVA_REL/$YML_FILENAME
+RUN wget -nv -U UA-IBM_JAVA_Docker -O /tmp/ibm-java.yml $BASE_URL/$JAVA_VER$JAVA_REL/$YML_FILENAME
 RUN JAVA_URL=$(cat /tmp/ibm-java.yml | sed -n 's/\s*uri:\s//p' | tr -d '\r')
-RUN wget -q -U UA-IBM-JAVA-Docker -O /tmp/ibm-java.bin $JAVA_URL
+RUN wget -nv -U UA-IBM-JAVA-Docker -O /tmp/ibm-java.bin $JAVA_URL
 RUN ESUM=$(cat /tmp/ibm-java.yml | sed -n 's/\s*md5sum:\s//p' | tr -d '\r')
 RUN echo "$ESUM /tmp/ibm-java.bin" | md5sum -c -
 RUN rm -f /tmp/ibm-java.yml
