@@ -13,5 +13,5 @@ before_install:
  - sudo apt-get -y update
  - sudo apt-get -y install golang
  - export PATH=$PATH:/usr/lib/go-1.6
- - export GOPATH=pwd
+ - export GOPATH=$HOME
 
