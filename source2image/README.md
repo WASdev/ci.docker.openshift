@@ -8,7 +8,7 @@ Explanation of Dockerfile:
 
 The first line "FROM" pulls down the WebSphere Liberty image from Dockerhub.
 
-The next set of "RUN" commands install maven, create a directory to store the source code and install a jdk which is needed for OpenShift.
+The next set of "RUN" commands install maven, create a directory to store the source code and install an SDK which is needed to build the application..
 
 The "LABEL" set of lines sets information on the containers that is used by the source2image tool such as its name, the ports that are required, destination of the copied source and the location of the source2image scripts.
 

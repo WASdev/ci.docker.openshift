@@ -44,16 +44,16 @@ echo "Check that WebSphere Liberty has been created and that the application has
 count=${2:-1}
 end=$((SECONDS+60))
 found=1
-	while (( $found != 0 && $SECONDS < $end ))
-		do
-		sleep 3s
-    docker logs libertys2i | grep "Application ferret-1.1-SNAPSHOT started in"
-    found=$?
-		done
-    if [ $found == 0 ]
-    then
-      echo "Test Passed"
+while (( $found != 0 && $SECONDS < $end ))
+do
+	sleep 3s
+	docker logs libertys2i | grep "Application ferret-1.1-SNAPSHOT started in"
+	found=$?
+done
+if [ $found == 0 ]
+then
+	echo "Test Passed"
 	exit
-    else
+else
 	exit 2
-    fi
+fi
