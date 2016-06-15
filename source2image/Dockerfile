@@ -1,12 +1,14 @@
 FROM websphere-liberty:javaee7
 # Install Maven
+RUN apt-get update /
+  && apt-get -y install maven
+
 ENV JAVA_VER=8 \
     JAVA_REL=0 \
     JAVA_MF=3.0
 
-RUN apt-get update \
-  && rm -r /opt/ibm/java/ \
-  && apt-get -y install maven \
+#Install IBM Java SDK
+RUN rm -r /opt/ibm/java/ \
   && mkdir -p /opt/s2i/destination \
   && TARGET_ARCH=$(uname -m) \
   && JAVA_VRMF=$JAVA_VER.$JAVA_REL-$JAVA_MF \
