@@ -53,20 +53,20 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   fi
 
 
-  #Copy .war file from the source directory
+#Copy .war file from the source directory
   echo "Copying built war files into $DEPLOY_DIR for later deployment..."
   popd &> /dev/null
-else
+  else
   echo "Copying binaries in source directory into $DEPLOY_DIR for later deployment..."
-fi
+  fi
 
-if [ -d $LOCAL_SOURCE_DIR/target ]; then
+  if [ -d $LOCAL_SOURCE_DIR/target ]; then
   cp $LOCAL_SOURCE_DIR/target/*.war $DEPLOY_DIR >& /dev/null
   chgrp -R 0 $DEPLOY_DIR
   chmod -R g+rw $DEPLOY_DIR
-fi
+  fi
 
-if [ -d $LOCAL_SOURCE_DIR/deployments ]; then
+  if [ -d $LOCAL_SOURCE_DIR/deployments ]; then
   cp $LOCAL_SOURCE_DIR/deployments/*.war $DEPLOY_DIR >& /dev/null
   chgrp -R 0 $DEPLOY_DIR
   chmod -R g+rw $DEPLOY_DIR
